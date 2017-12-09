@@ -6,7 +6,6 @@ public class Sudoku {
     private int zeroCount;
     private int lastS, lastZ;
 
-    // weitere Attribute !
     Sudoku(String file) throws IOException {
         // Initialisierung des Spielfeldes
         dim = 9;
@@ -53,12 +52,13 @@ public class Sudoku {
             return 'q';
         }
 
-        //wenn alle anderen checks wahr sind, dann ist l wahr,
-        //man muss nur noch zeigen, dass nicht f wahr ist
         lastZ = zeile;
         lastS = spalte;
         spielfeld[zeile][spalte] = (byte) wert;
         zeroCount--;
+
+        //wenn alle anderen checks wahr sind, dann ist l wahr,
+        //man muss nur noch zeigen, dass nicht f wahr ist
         return (zeroCount <= 0) ? 'f' : 'l';
 
     }
@@ -103,6 +103,7 @@ public class Sudoku {
             }
         }
     }
+
     private boolean zCheck (int zeile, int wert){
         boolean erg = false;
         for (int i = 0; i < dim ; i++){
