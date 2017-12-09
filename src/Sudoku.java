@@ -4,6 +4,7 @@ public class Sudoku {
     private byte[][] spielfeld;
     private final int dim, quad;
     private int zeroCount;
+    private int lastS, lastZ;
 
     // weitere Attribute !
     public Sudoku(String file) throws IOException {
@@ -19,11 +20,12 @@ public class Sudoku {
             temp = in.readLine();
             // ... speichern dieser Werte in das Spielfeld
             for (int j = 0; j < dim; j++) {
-                if (temp.charAt(j) == '*') spielfeld[i][j] = 0;
-                zeroCount++;
+                if (temp.charAt(j) == '*') {
+                    spielfeld[i][j] = 0;
+                    zeroCount++;
+                }
                 else {
                     spielfeld[i][j] = (byte) (temp.charAt(j)-'0');
-
                 }
             }
         }
@@ -33,21 +35,29 @@ public class Sudoku {
         if ((zeile < 1 || 9 < zeile) || (spalte < 1 || 9 < spalte)){
             return 'p';
         }
-        if ((1< wert)||(wert<9)){
+        if ((wert < 1)||(9 < wert)){
             return 'w';
         }
-
-        if (zCheck(zeile-1, wert)){
+        zeile--;
+        spalte--;
+        if(!(spielfeld[zeile][spalte] == 0)){
+            return 'b';
+        }
+        if (zCheck(zeile, wert)){
             return 'z';
         }
-        if (sCheck(spalte-1, wert)){
+        if (sCheck(spalte, wert)){
             return 's';
         }
-        if (qCheck(zeile-1, spalte-1 , wert)){
+        if (qCheck(zeile, spalte , wert)){
             return 'q';
         }
+
         //wenn alle anderen checks wahr sind, dann ist l wahr,
         //man muss nur noch zeigen, dass nicht f wahr ist
+        lastZ = zeile;
+        lastS = spalte;
+        spielfeld[zeile][spalte] = (byte) wert;
         return (zeroCount <= 0) ? 'f' : 'l';
 
     }
@@ -57,21 +67,24 @@ public class Sudoku {
         int zBase = zeile / quad;
         int qSpalte = spalte % quad;
         int sBase  = spalte / quad;
-        int [] qZahlen = new int[9];
+        int [] qZahlen = new int[dim];
         int i = 0;
         for (int z = 0; z < quad; z++){
             for (int s = 0; s < quad; s++){
-                qZahlen[i] =
+                qZahlen[i] =(int) spielfeld[qZeile+quad*zBase][qSpalte+quad*sBase];
             }
         }
-
-
+        for (int j : qZahlen){
+            if (j==wert){
+                return true;
+            }
+        }
         return false;
     }
 
     public void print (){
-        System.out.print(" 123 456 789\n");
-        System.out.print(" ___ ___ ___\n");
+        System.out.print("  123 456 789\n");
+        System.out.print("  --- --- ---\n");
 
         for (int z = 0; z < dim ; z++){
             System.out.print((z+1) + "|" );
@@ -82,14 +95,15 @@ public class Sudoku {
                 }
             }
             System.out.print("\n");
+            if (((z+1) % quad)==0){
+                System.out.print("  --- --- ---\n");
+            }
         }
-
-        System.out.print("  ___ ___ ___\n");
     }
     private boolean zCheck (int zeile, int wert){
         boolean erg = false;
         for (int i = 0; i < dim ; i++){
-            if (spielfeld[zeile][i] == wert){
+            if (spielfeld[zeile][i] == (byte) wert){
                 erg = true;
             }
         }
@@ -98,20 +112,24 @@ public class Sudoku {
     private boolean sCheck (int spalte, int wert){
         boolean erg = false;
         for (int i = 0; i < dim ; i++){
-            if (spielfeld[i][spalte] == wert){
+            if (spielfeld[i][spalte] == (byte) wert){
                 erg = true;
             }
         }
         return erg;
     }
-    private boolean checkGame (){
-        for (int z = 0; z < dim ; z++){
-            for(int s = 0; s< dim; s++){
-                if (spielfeld[z][s] == 0){
-                    return false;
-                }
-            }
-        }
+//    private boolean checkGame (){
+//        for (int z = 0; z < dim ; z++){
+//            for(int s = 0; s< dim; s++){
+//                if (spielfeld[z][s] == 0){
+//                    return false;
+//                }
+//            }
+//        }
+//    }
+
+    public void widerrufen() {
+        spielfeld[lastZ][lastS] = 0;
     }
-    private boolean
+
 }
