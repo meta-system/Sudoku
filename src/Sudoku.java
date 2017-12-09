@@ -7,7 +7,7 @@ public class Sudoku {
     private int lastS, lastZ;
 
     // weitere Attribute !
-    public Sudoku(String file) throws IOException {
+    Sudoku(String file) throws IOException {
         // Initialisierung des Spielfeldes
         dim = 9;
         quad =(int) Math.sqrt(dim);
@@ -118,15 +118,6 @@ public class Sudoku {
         }
         return erg;
     }
-//    private boolean checkGame (){
-//        for (int z = 0; z < dim ; z++){
-//            for(int s = 0; s< dim; s++){
-//                if (spielfeld[z][s] == 0){
-//                    return false;
-//                }
-//            }
-//        }
-//    }
 
     public void widerrufen() {
         spielfeld[lastZ][lastS] = 0;
