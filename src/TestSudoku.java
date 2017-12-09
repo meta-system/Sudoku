@@ -4,8 +4,8 @@ public class TestSudoku {
         Sudoku mySudoku = new Sudoku("src/beispiel.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         boolean victory = false;
-        int zeile=0, spalte=0, wert=0;
-        boolean reverted = false;
+        int zeile, spalte, wert;
+        //boolean reverted = false;
         mySudoku.print();
 
         do {
