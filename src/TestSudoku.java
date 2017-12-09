@@ -22,7 +22,7 @@ public class TestSudoku {
             switch (mySudoku.setze(zeile, spalte, wert)){
                 case 'p' : System.out.println("Als Zeilen und Spalten sind nur Werte zwischen 1 und 9 zulaessig!"); break;
                 case 'w' : System.out.println("Der Wert muss zwischen 1 und 9 liegen !"); break;
-                case 'b' : System.out.println("An der Stelle gibt's schon einen Wert, du Witzbold!"); break;
+                case 'b' : System.out.println("An der Stelle liegt bereits ein Wert vor!"); break;
                 case 'z' : System.out.println("In dieser Zeile kommt bereits eine " + wert + " vor!"); break;
                 case 's' : System.out.println("In dieser Spalte kommt bereits eine " + wert + " vor!"); break;
                 case 'q' : System.out.println("Der Quadrant enthaelt bereits eine " + wert + "!"); break;
