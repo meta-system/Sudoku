@@ -24,8 +24,8 @@ public class TestSudoku {
                 case 'w' : System.out.println("Der Wert muss zwischen 1 und 9 liegen !"); break;
                 case 'b' : System.out.println("An der Stelle gibt's schon einen Wert, du Witzbold!"); break;
                 case 'z' : System.out.println("In dieser Zeile kommt bereits eine " + wert + " vor!"); break;
-                case 's' : System.out.println("Der Wert muss zwischen 1 und 9 liegen !"); break;
-                case 'q' : System.out.println("Der Quadrant enthaelt bereits eine 1!"); break;
+                case 's' : System.out.println("In dieser Spalte kommt bereits eine " + wert + " vor!"); break;
+                case 'q' : System.out.println("Der Quadrant enthaelt bereits eine " + wert + "!"); break;
                 case 'f' :
                     mySudoku.print();
                     System.out.println("Gratuliere, Sie haben das Rätsel gelöst!");
