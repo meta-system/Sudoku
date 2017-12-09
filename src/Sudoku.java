@@ -58,6 +58,7 @@ public class Sudoku {
         lastZ = zeile;
         lastS = spalte;
         spielfeld[zeile][spalte] = (byte) wert;
+        zeroCount--;
         return (zeroCount <= 0) ? 'f' : 'l';
 
     }
@@ -68,15 +69,23 @@ public class Sudoku {
         int qSpalte = spalte % quad;
         int sBase  = spalte / quad;
         int [] qZahlen = new int[dim];
+
         int i = 0;
         for (int z = 0; z < quad; z++){
             for (int s = 0; s < quad; s++){
-                qZahlen[i] =(int) spielfeld[qZeile+quad*zBase][qSpalte+quad*sBase];
+                qZahlen[i] =(int) spielfeld[z+quad*zBase][s+quad*sBase];
+                System.out.println("qZahlen: " + qZahlen[i]);
+                i++;
             }
         }
-        for (int j : qZahlen){
-            if (j==wert){
+        for (int j = 0; j<qZahlen.length; j++){
+            System.out.println(qZahlen[j]);
+        }
+        for (int j = 0; j < qZahlen.length; j++){
+            if (qZahlen[j]==wert){
                 return true;
+            } else {
+                System.out.println(qZahlen[j] + " " + wert);
             }
         }
         return false;
