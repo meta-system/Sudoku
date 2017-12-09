@@ -64,30 +64,24 @@ public class Sudoku {
     }
 
     private boolean qCheck(int zeile, int spalte, int wert) {
-        int qZeile  = zeile % quad;
         int zBase = zeile / quad;
-        int qSpalte = spalte % quad;
         int sBase  = spalte / quad;
         int [] qZahlen = new int[dim];
-
         int i = 0;
+
         for (int z = 0; z < quad; z++){
             for (int s = 0; s < quad; s++){
                 qZahlen[i] =(int) spielfeld[z+quad*zBase][s+quad*sBase];
-                System.out.println("qZahlen: " + qZahlen[i]);
                 i++;
             }
         }
-        for (int j = 0; j<qZahlen.length; j++){
-            System.out.println(qZahlen[j]);
-        }
-        for (int j = 0; j < qZahlen.length; j++){
-            if (qZahlen[j]==wert){
+
+        for (int j : qZahlen){
+            if (j==wert){
                 return true;
-            } else {
-                System.out.println(qZahlen[j] + " " + wert);
             }
         }
+
         return false;
     }
 
